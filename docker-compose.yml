@@ -12,7 +12,7 @@ services:
       # Synchronisation du code backend en local
       - ./backend:/var/www
       # Exclure vendor pour éviter les conflits
-      - /var/www/vendor
+      # - /var/www/vendor
       # Volumes pour les données persistantes
       - laravel_storage:/var/www/storage/app
       - laravel_cache:/var/www/bootstrap/cache
