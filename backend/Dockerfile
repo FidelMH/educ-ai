@@ -12,35 +12,35 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     zip \
-    unzip
+    unzip \
+ && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Nettoyage du cache
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
-
-# Installation des extensions PHP
+# Extensions PHP
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
-# Installation de Composer
+# Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Création de l'utilisateur système
-RUN useradd -G www-data,root -u $uid -d /home/$user $user
-RUN mkdir -p /home/$user/.composer && \
-    chown -R $user:$user /home/$user
+# Créer un utilisateur
+RUN useradd -G www-data,root -u $uid -d /home/$user $user \
+ && mkdir -p /home/$user/.composer \
+ && chown -R $user:$user /home/$user
 
-# Définir le répertoire de travail
+# Répertoire de travail
 WORKDIR /var/www
 
-# Copier les fichiers du projet
+# Copier le projet
 COPY . /var/www
 
-# Permissions
-RUN chown -R $user:www-data /var/www
+# Créer le dossier vendor avec bonnes permissions
+RUN mkdir -p /var/www/vendor \
+ && chown -R $user:www-data /var/www/vendor \
+ && chown -R $user:www-data /var/www
 
-# Utiliser l'utilisateur créé
+# Utiliser l'utilisateur
 USER $user
 
-# Exposer le port 8000
+# Exposer le port
 EXPOSE 8000
 
 # Commande par défaut
