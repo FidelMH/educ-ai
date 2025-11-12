@@ -14,4 +14,9 @@ class Subject extends Model
     {
         return $this->hasMany(Study::class);
     }
+
+    public function levels()
+    {
+        return $this->hasMany(Level::class);
+    }
 }
