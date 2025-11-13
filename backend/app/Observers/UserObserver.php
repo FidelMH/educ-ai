@@ -16,7 +16,7 @@ class UserObserver
         if (!$user->roles_id) {
             $userRole = Role::where('role', 'user')->first();
             if ($userRole) {
-                $user->roles_id = $userRole->id;
+                $user->roles_id = $userRole->id; // = 2
             }
         }
     }

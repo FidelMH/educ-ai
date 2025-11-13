@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Levels;
+use App\Models\Level;
 use Illuminate\Http\Request;
 
 class LevelsController extends Controller
@@ -34,7 +34,7 @@ class LevelsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Levels $levels)
+    public function show(Level $levels)
     {
         //
     }
@@ -42,7 +42,7 @@ class LevelsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Levels $levels)
+    public function edit(Level $levels)
     {
         //
     }
@@ -50,7 +50,7 @@ class LevelsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Levels $levels)
+    public function update(Request $request, Level $levels)
     {
         //
     }
@@ -58,7 +58,7 @@ class LevelsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Levels $levels)
+    public function destroy(Level $levels)
     {
         //
     }

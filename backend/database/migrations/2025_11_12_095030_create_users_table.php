@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('password');
             $table->boolean('consentement')->default(false);
             $table->rememberToken();
-            $table->foreignId('roles_id')->constrained()->onDelete('casade');
+            $table->foreignId('roles_id')->constrained('roles')->onDelete('cascade');
             $table->timestamps();
         });
 
