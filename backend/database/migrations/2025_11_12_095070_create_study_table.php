@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('agents', function (Blueprint $table) {
+        Schema::create('study', function (Blueprint $table) {
             $table->id();
-            $table->string('prompt');
-            $table->integer('id_subject'); // foreign
-            $table->integer('id_level');
+            $table->foreignId('subject_id')->constrained(); // Foreign
+            $table->foreignId('user_id')->constrained(); // Foreign
             $table->timestamps();
         });
     }
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('agents');
+        Schema::dropIfExists('study');
     }
 };

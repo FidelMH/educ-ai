@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('discuss', function (Blueprint $table) {
+        Schema::create('agents', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_agent');
+            $table->string('prompt');
+            $table->foreignId('subject_id')->constrained(); // foreign
+            $table->foreignId('level_id')->constrained();
             $table->timestamps();
         });
     }
@@ -23,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('discuss');
+        Schema::dropIfExists('agents');
     }
 };
