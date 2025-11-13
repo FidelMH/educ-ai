@@ -33,13 +33,18 @@ class RegisterController extends Controller
         // Récupérer l'ID du rôle "user"
         $userRole = Role::where('role', 'user')->first();
 
+        if (!$userRole) {
+            return back()->withErrors([
+                'error' => 'Le rôle par défaut n\'existe pas. Veuillez contacter l\'administrateur.'
+            ]);
+        }
+
         $user = User::create([
             'lastname' => $request->lastname,
             'firstname' => $request->firstname,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'consentement' => true,
-            'roles_id' => $userRole->id, //✅ Attribuer le rôle 
         ]);
 
         event(new Registered($user));

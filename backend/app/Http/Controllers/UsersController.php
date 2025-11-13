@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Users;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
@@ -34,7 +34,7 @@ class UsersController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Users $users)
+    public function show(User $users)
     {
         //
     }

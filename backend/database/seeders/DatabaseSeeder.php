@@ -17,11 +17,20 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
+        // 1. D'ABORD créer les rôles
+        $this->call([
+            RoleSeeder::class,
+        ]);
+
+        // 2. ENSUITE créer l'admin
         User::factory()->create([
             'firstname' => 'Admin',
-            'lastname' => 'Super',
-            'email' => 'admin@example.com',
-            'consentement' => true,
+            'lastname'  => 'Super',
+            'email'     => 'admin@example.com',
+            'email_verified_at' => now(),
+            'password'  => bcrypt('password'),
+            'consentement' => 1,
+            'roles_id'  => 1, // admin
         ]);
     }
 }

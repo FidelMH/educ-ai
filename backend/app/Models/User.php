@@ -22,7 +22,8 @@ class User extends Authenticatable
         'firstname',  
         'email',
         'password',
-        'consentement'
+        'consentement',
+        'roles_id'
     ];
 
     /**
@@ -54,4 +55,22 @@ class User extends Authenticatable
         return "{$this->firstname} {$this->lastname}";
     }
 
+    public function has()
+    {
+        return $this->hasMany(Has::class);
+    }
+
+    public function studies()
+    {
+        return $this->hasMany(Study::class);
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'roles_id');    
+    }
+
+    public function messages(){
+        return $this->hasMany(Message::class);
+    }
 }
