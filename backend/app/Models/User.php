@@ -51,7 +51,7 @@ class User extends Authenticatable
 
     public function has()
     {
-        return $this->hasMany(Hass::class);
+        return $this->hasMany(Has::class);
     }
 
     public function studies()
