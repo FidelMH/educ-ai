@@ -6,5 +6,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class Level extends Model
 {
-    //
+    protected $fillable = [
+        'description',
+        'level',
+    ];
+
+    public function has()
+    {
+        return $this->hasOne(Has::class);
+    }
+
+    public function subjects()
+    {
+        return $this->hasOne(Subject::class);
+    }
+    
+        public function agents()
+    {
+        return $this->hasOne(Agent::class);
+    }
 }
