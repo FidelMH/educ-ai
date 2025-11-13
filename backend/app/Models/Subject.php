@@ -15,8 +15,8 @@ class Subject extends Model
         return $this->hasMany(Study::class);
     }
 
-    public function levels()
+    public function agent()
     {
-        return $this->hasMany(Level::class);
+        return $this->belongsTo(Agent::class);
     }
 }

@@ -8,6 +8,7 @@ class Message extends Model
 {
      protected $fillable = [
         'type_message',
+        'message',
     ];
 
     public function discuss()

@@ -48,4 +48,23 @@ class User extends Authenticatable
             'consentement' => 'boolean', 
         ];
     }
+
+    public function has()
+    {
+        return $this->hasMany(Hass::class);
+    }
+
+    public function studies()
+    {
+        return $this->hasMany(Study::class);
+    }
+
+    public function role()
+    {
+        return $this->hasOne(Role::class);
+    }
+
+    public function messages(){
+        return $this->hasMany(Message::class);
+    }
 }
