@@ -21,7 +21,6 @@ class User extends Authenticatable
         'lastname',
         'firstname',  
         'email',
-        'consentement', 
         'password',
         'consentement'
     ];
@@ -54,4 +53,5 @@ class User extends Authenticatable
     {
         return "{$this->firstname} {$this->lastname}";
     }
+
 }
