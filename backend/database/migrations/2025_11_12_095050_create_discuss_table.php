@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('has', function (Blueprint $table) {
+        Schema::create('discusses', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_user'); // Foreign
-            $table->integer('id_level'); //Foreign
+            $table->foreignId('agent_id')->constrained();
             $table->timestamps();
         });
     }
@@ -24,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('has');
+        Schema::dropIfExists('discusses');
     }
 };
