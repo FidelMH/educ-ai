@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Agents;
+use App\Models\Agent;
 use Illuminate\Http\Request;
 
 class AgentsController extends Controller
@@ -12,7 +12,8 @@ class AgentsController extends Controller
      */
     public function index()
     {
-        //
+        $agents = Agent::all();
+        return view(['dashbord.agent.list','agents' => $agents]);
     }
 
     /**
