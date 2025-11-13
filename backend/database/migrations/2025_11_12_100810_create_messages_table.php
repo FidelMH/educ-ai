@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
             $table->string('type_message');
+            $table->string('message');
             $table->foreignId('user_id')->constrained();
             $table->foreignId('discuss_id')->constrained();
             $table->foreignId('agent_id')->constrained();
