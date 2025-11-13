@@ -16,13 +16,13 @@ class Level extends Model
         return $this->hasOne(Has::class);
     }
 
-    public function subjects()
-    {
-        return $this->hasOne(Subject::class);
-    }
+    // public function subjects()
+    // {
+    //     return $this->hasOne(Subject::class);
+    // }
     
         public function agents()
     {
-        return $this->hasOne(Agent::class);
+        return $this->belongsTo(Agent::class);
     }
 }
