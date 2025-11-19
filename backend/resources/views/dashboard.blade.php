@@ -82,6 +82,22 @@
             <p>Vous êtes connecté avec succès.</p>
             <p><strong>Email :</strong> {{ auth()->user()->email }}</p>
         </div>
+
+        <div style="margin-top: 30px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+            <a href="{{ route('agents.index') }}" style="text-decoration: none;">
+                <div style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); text-align: center; transition: transform 0.2s;">
+                    <div style="font-size: 48px; margin-bottom: 15px;">🤖</div>
+                    <h3 style="color: #333; margin-bottom: 10px;">Gestion des Agents</h3>
+                    <p style="color: #666; font-size: 14px;">Créer et gérer vos agents IA</p>
+                </div>
+            </a>
+        </div>
     </div>
+
+    <style>
+        a div:hover {
+            transform: translateY(-5px);
+        }
+    </style>
 </body>
 </html>
