@@ -3,130 +3,92 @@
 namespace App\Http\Controllers;
 
 use App\Models\Agent;
-use App\Models\Level;
 use App\Models\Subject;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class AgentController extends Controller
 {
     /**
-     * Affiche une liste de la ressource.
+     * Display a listing of the resource.
      */
     public function index()
     {
-        // Précharge les relations pour éviter le problème N+1
-        $agents = Agent::with(['level', 'subject'])->latest()->paginate(10); 
-
+        // Eager load the subject for each agent
+        $agents = Agent::with('subject')->latest()->paginate(10);
         return view('agents.index', compact('agents'));
     }
 
-
-
     /**
-     * Affiche le formulaire pour créer une nouvelle ressource.
+     * Show the form for creating a new resource.
      */
     public function create()
     {
-        // Récupère les données nécessaires pour les listes déroulantes du formulaire
-        $levels = Level::all();
-        $subjects = Subject::all();
+        // Find subjects that do not already have an agent
+        $subjectsWithoutAgent = Subject::whereDoesntHave('agent')->get();
+        
+        if ($subjectsWithoutAgent->isEmpty()) {
+            return redirect()->route('agents.index')->with('info', 'Toutes les matières ont déjà un agent configuré.');
+        }
 
-        return view('agents.create', compact('levels', 'subjects'));
+        return view('agents.create', compact('subjectsWithoutAgent'));
     }
 
-
     /**
-     * Stocke une nouvelle ressource dans la base de données (CREATE).
+     * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        // 1. Validation des données
         $request->validate([
+            'subject_id' => [
+                'required',
+                'exists:subjects,id',
+                Rule::unique('agents', 'subject_id'),
+            ],
             'prompt' => 'required|string|max:2000',
-            // Clés étrangères : doivent exister dans leurs tables respectives
-            'level_id' => 'required|exists:levels,id',
-            'subject_id' => 'required|exists:subjects,id',
         ]);
-        
-        // Les relations hasOne (level et subject) doivent être gérées via des clés étrangères 
-        // dans la table 'agents', ou si ces clés sont dans les tables 'levels'/'subjects', 
-        // vous devez gérer leur création/association séparément. 
-        // Si les clés sont dans 'agents', le code est simple :
-        
-        // 2. Création de l'enregistrement
-        $agent = Agent::create([
-            'prompt' => $request->input('prompt'),
-            'level_id' => $request->input('level_id'), // Supposant que agent a un level_id/subject_id
-            'subject_id' => $request->input('subject_id'), // dans sa propre table.
-        ]);
-        
-        // *NOTE IMPORTANTE sur les relations HasOne/BelongsTo :*
-        // Pour que hasOne fonctionne comme vous l'avez défini, les tables 'levels' et 'subjects' 
-        // devraient avoir une colonne 'agent_id'. Cependant, en CRUD, il est plus courant 
-        // que l'entité qui possède la clé étrangère soit le 'belongsTo'.
-        // J'ai supposé que vous gériez les IDs directement dans la table `agents`.
 
-        // 3. Redirection
+        Agent::create($request->all());
+
         return redirect()->route('agents.index')
                          ->with('success', 'Agent créé avec succès.');
     }
 
-
     /**
-     * Affiche la ressource spécifiée (READ ONE).
+     * Display the specified resource.
      */
-    public function show(Agent $agent) // Route Model Binding
+    public function show(Agent $agent)
     {
-        // Charge les relations pour l'affichage détaillé
-        $agent->load(['level', 'subject']);
-        
+        $agent->load('subject');
         return view('agents.show', compact('agent'));
     }
 
-
-
     /**
-     * Affiche le formulaire pour éditer la ressource spécifiée.
+     * Show the form for editing the specified resource.
      */
     public function edit(Agent $agent)
     {
-        // Récupère les listes pour les sélecteurs
-        $levels = Level::all();
-        $subjects = Subject::all();
-        
-        return view('agents.edit', compact('agent', 'levels', 'subjects'));
+        // In this new design, you're just editing the prompt for the agent's existing subject.
+        return view('agents.edit', compact('agent'));
     }
 
-
-
     /**
-     * Met à jour la ressource spécifiée dans la base de données (UPDATE).
+     * Update the specified resource in storage.
      */
     public function update(Request $request, Agent $agent)
     {
-        // 1. Validation des données
         $request->validate([
             'prompt' => 'required|string|max:2000',
-            'level_id' => 'required|exists:levels,id',
-            'subject_id' => 'required|exists:subjects,id',
         ]);
 
-        // 2. Mise à jour de l'enregistrement
-        $agent->update([
-            'prompt' => $request->input('prompt'),
-            'level_id' => $request->input('level_id'),
-            'subject_id' => $request->input('subject_id'),
-        ]);
+        $agent->update($request->only('prompt'));
 
-        // 3. Redirection
         return redirect()->route('agents.index')
-                         ->with('success', 'Agent mis à jour avec succès.');
+                         ->with('success', 'Prompt de l\'agent mis à jour avec succès.');
     }
 
-
-
     /**
-     * Supprime la ressource spécifiée de la base de données (DELETE).
+     * Remove the specified resource from storage.
      */
     public function destroy(Agent $agent)
     {

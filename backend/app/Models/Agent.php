@@ -9,13 +9,7 @@ class Agent extends Model
     protected $fillable = [
         'prompt',
         'subject_id',
-        'level_id',
     ];
-
-    public function level()
-    {
-        return $this->belongsTo(Level::class);
-    }
 
     public function subject()
     {

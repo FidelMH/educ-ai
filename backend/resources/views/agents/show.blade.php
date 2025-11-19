@@ -46,18 +46,6 @@
                             </p>
                         </div>
 
-                        <!-- Niveau -->
-                        <div class="border-b pb-4">
-                            <h3 class="text-lg font-semibold text-gray-700 mb-2">Niveau</h3>
-                            <p class="text-gray-900">
-                                @if($agent->level)
-                                    {{ $agent->level->level }}
-                                @else
-                                    <span class="text-gray-500 italic">Non défini</span>
-                                @endif
-                            </p>
-                        </div>
-
                         <!-- Dates -->
                         <div class="grid grid-cols-2 gap-4">
                             <div>

@@ -13,7 +13,7 @@ class LevelsController extends Controller
     public function index()
     {
         // Précharge la relation agents pour éviter le problème N+1
-        $levels = Level::withCount('agents')->latest()->paginate(10);
+        $levels = Level::withCount('users')->latest()->paginate(10);
 
         return view('levels.index', compact('levels'));
     }
@@ -59,7 +59,7 @@ class LevelsController extends Controller
     public function show(Level $level) // Route Model Binding
     {
         // Charge la relation agents pour l'affichage détaillé
-        $level->load('agents');
+        $level->load('users');
 
         return view('levels.show', compact('level'));
     }
@@ -104,10 +104,10 @@ class LevelsController extends Controller
      */
     public function destroy(Level $level)
     {
-        // Vérification de sécurité : empêcher la suppression si des agents sont associés
-        if ($level->agents()->count() > 0) {
+        // Vérification de sécurité : empêcher la suppression si des utilisateurs sont associés
+        if ($level->users()->count() > 0) {
             return redirect()->route('levels.index')
-                             ->with('error', 'Impossible de supprimer ce niveau car des agents y sont associés.');
+                             ->with('error', 'Impossible de supprimer ce niveau car des utilisateurs y sont associés.');
         }
 
         $level->delete();

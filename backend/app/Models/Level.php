@@ -21,8 +21,8 @@ class Level extends Model
     //     return $this->hasOne(Subject::class);
     // }
 
-    public function agents()
+    public function users()
     {
-        return $this->hasMany(Agent::class, 'level_id');
+        return $this->hasMany(User::class, 'level_id');
     }
 }

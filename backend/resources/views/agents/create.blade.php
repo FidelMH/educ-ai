@@ -17,24 +17,9 @@
                     <form method="POST" action="{{ route('agents.store') }}" class="space-y-6">
                         @csrf
 
-                        <!-- Prompt -->
-                        <div>
-                            <x-input-label for="prompt" :value="__('Prompt')" />
-                            <textarea
-                                id="prompt"
-                                name="prompt"
-                                rows="5"
-                                class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                                required
-                                autofocus
-                            >{{ old('prompt') }}</textarea>
-                            <x-input-error :messages="$errors->get('prompt')" class="mt-2" />
-                            <p class="mt-1 text-sm text-gray-500">Maximum 2000 caractères</p>
-                        </div>
-
                         <!-- Subject -->
                         <div>
-                            <x-input-label for="subject_id" :value="__('Matière')" />
+                            <x-input-label for="subject_id" :value="__('Matière (celles sans agent uniquement)')" />
                             <select
                                 id="subject_id"
                                 name="subject_id"
@@ -42,7 +27,7 @@
                                 required
                             >
                                 <option value="">Sélectionnez une matière</option>
-                                @foreach($subjects as $subject)
+                                @foreach($subjectsWithoutAgent as $subject)
                                     <option value="{{ $subject->id }}" {{ old('subject_id') == $subject->id ? 'selected' : '' }}>
                                         {{ $subject->theme }}
                                     </option>
@@ -51,23 +36,19 @@
                             <x-input-error :messages="$errors->get('subject_id')" class="mt-2" />
                         </div>
 
-                        <!-- Level -->
+                        <!-- Prompt -->
                         <div>
-                            <x-input-label for="level_id" :value="__('Niveau')" />
-                            <select
-                                id="level_id"
-                                name="level_id"
+                            <x-input-label for="prompt" :value="__('Prompt de base')" />
+                            <textarea
+                                id="prompt"
+                                name="prompt"
+                                rows="5"
                                 class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                                 required
-                            >
-                                <option value="">Sélectionnez un niveau</option>
-                                @foreach($levels as $level)
-                                    <option value="{{ $level->id }}" {{ old('level_id') == $level->id ? 'selected' : '' }}>
-                                        {{ $level->level }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            <x-input-error :messages="$errors->get('level_id')" class="mt-2" />
+                                autofocus
+                            >{{ old('prompt', "Tu es un excellent tuteur. Ton objectif est d'expliquer des concepts de manière claire et concise.") }}</textarea>
+                            <x-input-error :messages="$errors->get('prompt')" class="mt-2" />
+                            <p class="mt-1 text-sm text-gray-500">Ce prompt de base sera complété dynamiquement avec le niveau de l'utilisateur lors d'une conversation.</p>
                         </div>
 
                         <div class="flex items-center justify-end space-x-4">

@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('agents', function (Blueprint $table) {
             $table->id();
-            $table->string('prompt');
-            $table->foreignId('subject_id')->constrained(); // foreign
-            $table->foreignId('level_id')->constrained();
+            $table->text('prompt');
+            $table->foreignId('subject_id')->unique()->constrained(); // foreign
             $table->timestamps();
         });
     }

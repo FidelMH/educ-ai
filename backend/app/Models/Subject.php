@@ -17,6 +17,6 @@ class Subject extends Model
 
     public function agent()
     {
-        return $this->belongsTo(Agent::class);
+        return $this->hasOne(Agent::class);
     }
 }

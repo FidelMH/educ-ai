@@ -21,6 +21,7 @@ return new class extends Migration
             $table->boolean('consentement')->default(false);
             $table->rememberToken();
             $table->foreignId('roles_id')->constrained('roles')->onDelete('cascade');
+            $table->foreignId('level_id')->nullable()->constrained('levels')->onDelete('set null');
             $table->timestamps();
         });
 

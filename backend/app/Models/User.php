@@ -23,7 +23,8 @@ class User extends Authenticatable
         'email',
         'password',
         'consentement',
-        'roles_id'
+        'roles_id',
+        'level_id'
     ];
 
     /**
@@ -68,6 +69,11 @@ class User extends Authenticatable
     public function role()
     {
         return $this->belongsTo(Role::class, 'roles_id');    
+    }
+
+    public function level()
+    {
+        return $this->belongsTo(Level::class, 'level_id');
     }
 
     public function messages(){
