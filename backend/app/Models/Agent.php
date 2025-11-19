@@ -10,7 +10,6 @@ class Agent extends Model
         'prompt',
         'subject_id',
         'level_id',
-        'discuss_id',
     ];
 
     public function level()
@@ -21,10 +20,5 @@ class Agent extends Model
     public function subject()
     {
         return $this->belongsTo(Subject::class);
-    }
-
-    public function discuss()
-    {
-        return $this->belongsTo(Discuss::class);
     }
 }

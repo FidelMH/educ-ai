@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('prompt');
             $table->foreignId('subject_id')->constrained(); // foreign
             $table->foreignId('level_id')->constrained();
-            $table->foreignId('discuss_id')->constrained();
             $table->timestamps();
         });
     }

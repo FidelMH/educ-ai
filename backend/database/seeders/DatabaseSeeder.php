@@ -20,6 +20,8 @@ class DatabaseSeeder extends Seeder
         // 1. D'ABORD créer les rôles
         $this->call([
             RoleSeeder::class,
+            LevelSeeder::class,
+            SubjectSeeder::class,
         ]);
 
         // 2. ENSUITE créer l'admin

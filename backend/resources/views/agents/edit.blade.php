@@ -51,7 +51,7 @@
                                 @foreach($subjects as $subject)
                                     <option value="{{ $subject->id }}"
                                         {{ old('subject_id', $agent->subject_id) == $subject->id ? 'selected' : '' }}>
-                                        {{ $subject->name }}
+                                        {{ $subject->theme }}
                                     </option>
                                 @endforeach
                             </select>
@@ -71,31 +71,11 @@
                                 @foreach($levels as $level)
                                     <option value="{{ $level->id }}"
                                         {{ old('level_id', $agent->level_id) == $level->id ? 'selected' : '' }}>
-                                        {{ $level->name }}
+                                        {{ $level->level }}
                                     </option>
                                 @endforeach
                             </select>
                             <x-input-error :messages="$errors->get('level_id')" class="mt-2" />
-                        </div>
-
-                        <!-- Discuss -->
-                        <div>
-                            <x-input-label for="discuss_id" :value="__('Discussion')" />
-                            <select
-                                id="discuss_id"
-                                name="discuss_id"
-                                class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                                required
-                            >
-                                <option value="">Sélectionnez une discussion</option>
-                                @foreach($discusses as $discuss)
-                                    <option value="{{ $discuss->id }}"
-                                        {{ old('discuss_id', $agent->discuss_id) == $discuss->id ? 'selected' : '' }}>
-                                        {{ $discuss->title }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            <x-input-error :messages="$errors->get('discuss_id')" class="mt-2" />
                         </div>
 
                         <div class="flex items-center justify-between">

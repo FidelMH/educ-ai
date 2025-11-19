@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Agent;
-use App\Models\Discuss; // Importez les modèles de relations
 use App\Models\Level;
 use App\Models\Subject;
 use Illuminate\Http\Request;
@@ -16,7 +15,7 @@ class AgentController extends Controller
     public function index()
     {
         // Précharge les relations pour éviter le problème N+1
-        $agents = Agent::with(['discuss', 'level', 'subject'])->latest()->paginate(10); 
+        $agents = Agent::with(['level', 'subject'])->latest()->paginate(10); 
 
         return view('agents.index', compact('agents'));
     }
@@ -29,11 +28,10 @@ class AgentController extends Controller
     public function create()
     {
         // Récupère les données nécessaires pour les listes déroulantes du formulaire
-        $discusses = Discuss::all();
         $levels = Level::all();
         $subjects = Subject::all();
 
-        return view('agents.create', compact('discusses', 'levels', 'subjects'));
+        return view('agents.create', compact('levels', 'subjects'));
     }
 
 
@@ -46,7 +44,6 @@ class AgentController extends Controller
         $request->validate([
             'prompt' => 'required|string|max:2000',
             // Clés étrangères : doivent exister dans leurs tables respectives
-            'discuss_id' => 'required|exists:discusses,id',
             'level_id' => 'required|exists:levels,id',
             'subject_id' => 'required|exists:subjects,id',
         ]);
@@ -59,7 +56,6 @@ class AgentController extends Controller
         // 2. Création de l'enregistrement
         $agent = Agent::create([
             'prompt' => $request->input('prompt'),
-            'discuss_id' => $request->input('discuss_id'),
             'level_id' => $request->input('level_id'), // Supposant que agent a un level_id/subject_id
             'subject_id' => $request->input('subject_id'), // dans sa propre table.
         ]);
@@ -82,7 +78,7 @@ class AgentController extends Controller
     public function show(Agent $agent) // Route Model Binding
     {
         // Charge les relations pour l'affichage détaillé
-        $agent->load(['discuss', 'level', 'subject']);
+        $agent->load(['level', 'subject']);
         
         return view('agents.show', compact('agent'));
     }
@@ -95,11 +91,10 @@ class AgentController extends Controller
     public function edit(Agent $agent)
     {
         // Récupère les listes pour les sélecteurs
-        $discusses = Discuss::all();
         $levels = Level::all();
         $subjects = Subject::all();
         
-        return view('agents.edit', compact('agent', 'discusses', 'levels', 'subjects'));
+        return view('agents.edit', compact('agent', 'levels', 'subjects'));
     }
 
 
@@ -112,7 +107,6 @@ class AgentController extends Controller
         // 1. Validation des données
         $request->validate([
             'prompt' => 'required|string|max:2000',
-            'discuss_id' => 'required|exists:discusses,id',
             'level_id' => 'required|exists:levels,id',
             'subject_id' => 'required|exists:subjects,id',
         ]);
@@ -120,7 +114,6 @@ class AgentController extends Controller
         // 2. Mise à jour de l'enregistrement
         $agent->update([
             'prompt' => $request->input('prompt'),
-            'discuss_id' => $request->input('discuss_id'),
             'level_id' => $request->input('level_id'),
             'subject_id' => $request->input('subject_id'),
         ]);

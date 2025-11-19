@@ -39,7 +39,7 @@
                             <h3 class="text-lg font-semibold text-gray-700 mb-2">Matière</h3>
                             <p class="text-gray-900">
                                 @if($agent->subject)
-                                    {{ $agent->subject->name }}
+                                    {{ $agent->subject->theme }}
                                 @else
                                     <span class="text-gray-500 italic">Non défini</span>
                                 @endif
@@ -51,19 +51,7 @@
                             <h3 class="text-lg font-semibold text-gray-700 mb-2">Niveau</h3>
                             <p class="text-gray-900">
                                 @if($agent->level)
-                                    {{ $agent->level->name }}
-                                @else
-                                    <span class="text-gray-500 italic">Non défini</span>
-                                @endif
-                            </p>
-                        </div>
-
-                        <!-- Discussion -->
-                        <div class="border-b pb-4">
-                            <h3 class="text-lg font-semibold text-gray-700 mb-2">Discussion</h3>
-                            <p class="text-gray-900">
-                                @if($agent->discuss)
-                                    {{ $agent->discuss->title }}
+                                    {{ $agent->level->level }}
                                 @else
                                     <span class="text-gray-500 italic">Non défini</span>
                                 @endif
