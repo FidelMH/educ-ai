@@ -8,6 +8,8 @@ use App\Http\Controllers\RolesController;
 use App\Http\Controllers\LevelsController;
 use App\Http\Controllers\UsersController;
 
+use App\Http\Controllers\SubjectsController;
+
 // Redirection de la page d'accueil vers login
 Route::get('/', function () {
     return redirect()->route('login');
@@ -35,4 +37,5 @@ Route::middleware('auth')->group(function () {
     Route::resource('roles', RolesController::class);
     Route::resource('levels', LevelsController::class);
     Route::resource('users', UsersController::class);
+    Route::resource('subjects', SubjectsController::class);
 });

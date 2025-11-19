@@ -115,6 +115,14 @@
                     <p style="color: #666; font-size: 14px;">Gérer les comptes utilisateurs</p>
                 </div>
             </a>
+
+            <a href="{{ route('subjects.index') }}" style="text-decoration: none;">
+                <div style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); text-align: center; transition: transform 0.2s;">
+                    <div style="font-size: 48px; margin-bottom: 15px;">📚</div>
+                    <h3 style="color: #333; margin-bottom: 10px;">Gestion des Matières</h3>
+                    <p style="color: #666; font-size: 14px;">Gérer les matières d'étude</p>
+                </div>
+            </a>
         </div>
     </div>
 
