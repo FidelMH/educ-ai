@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\LevelsController;
+use App\Http\Controllers\UsersController;
 
 // Redirection de la page d'accueil vers login
 Route::get('/', function () {
@@ -33,4 +34,5 @@ Route::middleware('auth')->group(function () {
     Route::resource('agents', AgentController::class);
     Route::resource('roles', RolesController::class);
     Route::resource('levels', LevelsController::class);
+    Route::resource('users', UsersController::class);
 });
