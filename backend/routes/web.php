@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AgentController;
+use App\Http\Controllers\RolesController;
 
 // Redirection de la page d'accueil vers login
 Route::get('/', function () {
@@ -29,4 +30,5 @@ Route::middleware('auth')->group(function () {
     })->name('profile.edit');
 
     Route::resource('agents', AgentController::class);
+    Route::resource('roles', RolesController::class);
 });

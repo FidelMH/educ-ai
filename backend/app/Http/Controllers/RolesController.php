@@ -8,58 +8,105 @@ use Illuminate\Http\Request;
 class RolesController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Affiche une liste de la ressource.
      */
     public function index()
     {
-        //
+        // Précharge la relation users pour éviter le problème N+1
+        $roles = Role::withCount('users')->latest()->paginate(10);
+
+        return view('roles.index', compact('roles'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Affiche le formulaire pour créer une nouvelle ressource.
      */
     public function create()
     {
-        //
+        return view('roles.create');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Stocke une nouvelle ressource dans la base de données (CREATE).
      */
     public function store(Request $request)
     {
-        //
+        // 1. Validation des données
+        $request->validate([
+            'role' => 'required|string|max:255|unique:roles,role',
+        ], [
+            'role.required' => 'Le nom du rôle est obligatoire.',
+            'role.unique' => 'Ce rôle existe déjà.',
+            'role.max' => 'Le nom du rôle ne peut pas dépasser 255 caractères.',
+        ]);
+
+        // 2. Création de l'enregistrement
+        Role::create([
+            'role' => $request->input('role'),
+        ]);
+
+        // 3. Redirection
+        return redirect()->route('roles.index')
+                         ->with('success', 'Rôle créé avec succès.');
     }
 
     /**
-     * Display the specified resource.
+     * Affiche la ressource spécifiée (READ ONE).
      */
-    public function show(Role $roles)
+    public function show(Role $role) // Route Model Binding
     {
-        //
+        // Charge la relation users pour l'affichage détaillé
+        $role->load('users');
+
+        return view('roles.show', compact('role'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Affiche le formulaire pour éditer la ressource spécifiée.
      */
-    public function edit(Role $roles)
+    public function edit(Role $role)
     {
-        //
+        return view('roles.edit', compact('role'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Met à jour la ressource spécifiée dans la base de données (UPDATE).
      */
-    public function update(Request $request, Role $roles)
+    public function update(Request $request, Role $role)
     {
-        //
+        // 1. Validation des données (ignore le rôle actuel pour la règle unique)
+        $request->validate([
+            'role' => 'required|string|max:255|unique:roles,role,' . $role->id,
+        ], [
+            'role.required' => 'Le nom du rôle est obligatoire.',
+            'role.unique' => 'Ce rôle existe déjà.',
+            'role.max' => 'Le nom du rôle ne peut pas dépasser 255 caractères.',
+        ]);
+
+        // 2. Mise à jour de l'enregistrement
+        $role->update([
+            'role' => $request->input('role'),
+        ]);
+
+        // 3. Redirection
+        return redirect()->route('roles.index')
+                         ->with('success', 'Rôle mis à jour avec succès.');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Supprime la ressource spécifiée de la base de données (DELETE).
      */
-    public function destroy(Role $roles)
+    public function destroy(Role $role)
     {
-        //
+        // Vérification de sécurité : empêcher la suppression si des utilisateurs sont associés
+        if ($role->users()->count() > 0) {
+            return redirect()->route('roles.index')
+                             ->with('error', 'Impossible de supprimer ce rôle car des utilisateurs y sont associés.');
+        }
+
+        $role->delete();
+
+        return redirect()->route('roles.index')
+                         ->with('success', 'Rôle supprimé avec succès.');
     }
 }
