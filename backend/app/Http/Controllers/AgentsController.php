@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Agents;
+use App\Models\Agent;
 use Illuminate\Http\Request;
 
 class AgentsController extends Controller
@@ -34,7 +34,7 @@ class AgentsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Agents $agents)
+    public function show(Agent $agents)
     {
         //
     }
@@ -42,7 +42,7 @@ class AgentsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Agents $agents)
+    public function edit(Agent $agents)
     {
         //
     }
@@ -50,7 +50,7 @@ class AgentsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Agents $agents)
+    public function update(Request $request, Agent $agents)
     {
         //
     }
@@ -58,7 +58,7 @@ class AgentsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Agents $agents)
+    public function destroy(Agent $agents)
     {
         //
     }

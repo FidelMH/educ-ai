@@ -21,8 +21,9 @@ class User extends Authenticatable
         'lastname',
         'firstname',  
         'email',
-        'consentement', 
         'password',
+        'consentement',
+        'roles_id'
     ];
 
     /**
@@ -49,6 +50,11 @@ class User extends Authenticatable
         ];
     }
 
+    public function getFullNameAttribute(): string
+    {
+        return "{$this->firstname} {$this->lastname}";
+    }
+
     public function has()
     {
         return $this->hasMany(Has::class);
@@ -61,7 +67,7 @@ class User extends Authenticatable
 
     public function role()
     {
-        return $this->hasOne(Role::class);
+        return $this->belongsTo(Role::class, 'roles_id');    
     }
 
     public function messages(){
