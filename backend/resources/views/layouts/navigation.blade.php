@@ -18,6 +18,9 @@
                     <x-nav-link :href="route('agents.index')" :active="request()->routeIs('agents.*')">
                         {{ __('Agents') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('discuss.index')" :active="request()->routeIs('discuss.*')">
+                        {{ __('Discussions') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('roles.index')" :active="request()->routeIs('roles.*')">
                         {{ __('Rôles') }}
                     </x-nav-link>
