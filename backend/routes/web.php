@@ -7,6 +7,7 @@ use App\Http\Controllers\AgentController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\LevelsController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\DiscussController;
 
 use App\Http\Controllers\SubjectsController;
 
@@ -38,4 +39,5 @@ Route::middleware('auth')->group(function () {
     Route::resource('levels', LevelsController::class);
     Route::resource('users', UsersController::class);
     Route::resource('subjects', SubjectsController::class);
+    Route::resource('discuss', DiscussController::class);
 });
