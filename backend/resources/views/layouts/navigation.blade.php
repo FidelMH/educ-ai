@@ -21,6 +21,9 @@
                     <x-nav-link :href="route('roles.index')" :active="request()->routeIs('roles.*')">
                         {{ __('Rôles') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('levels.index')" :active="request()->routeIs('levels.*')">
+                        {{ __('Niveaux') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -81,6 +84,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('roles.index')" :active="request()->routeIs('roles.*')">
                 {{ __('Rôles') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('levels.index')" :active="request()->routeIs('levels.*')">
+                {{ __('Niveaux') }}
             </x-responsive-nav-link>
         </div>
 

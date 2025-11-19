@@ -8,58 +8,111 @@ use Illuminate\Http\Request;
 class LevelsController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Affiche une liste de la ressource.
      */
     public function index()
     {
-        //
+        // Précharge la relation agents pour éviter le problème N+1
+        $levels = Level::withCount('agents')->latest()->paginate(10);
+
+        return view('levels.index', compact('levels'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Affiche le formulaire pour créer une nouvelle ressource.
      */
     public function create()
     {
-        //
+        return view('levels.create');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Stocke une nouvelle ressource dans la base de données (CREATE).
      */
     public function store(Request $request)
     {
-        //
+        // 1. Validation des données
+        $request->validate([
+            'level' => 'required|string|max:255',
+            'description' => 'required|string|max:500',
+        ], [
+            'level.required' => 'Le nom du niveau est obligatoire.',
+            'level.max' => 'Le nom du niveau ne peut pas dépasser 255 caractères.',
+            'description.required' => 'La description est obligatoire.',
+            'description.max' => 'La description ne peut pas dépasser 500 caractères.',
+        ]);
+
+        // 2. Création de l'enregistrement
+        Level::create([
+            'level' => $request->input('level'),
+            'description' => $request->input('description'),
+        ]);
+
+        // 3. Redirection
+        return redirect()->route('levels.index')
+                         ->with('success', 'Niveau créé avec succès.');
     }
 
     /**
-     * Display the specified resource.
+     * Affiche la ressource spécifiée (READ ONE).
      */
-    public function show(Level $levels)
+    public function show(Level $level) // Route Model Binding
     {
-        //
+        // Charge la relation agents pour l'affichage détaillé
+        $level->load('agents');
+
+        return view('levels.show', compact('level'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Affiche le formulaire pour éditer la ressource spécifiée.
      */
-    public function edit(Level $levels)
+    public function edit(Level $level)
     {
-        //
+        return view('levels.edit', compact('level'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Met à jour la ressource spécifiée dans la base de données (UPDATE).
      */
-    public function update(Request $request, Level $levels)
+    public function update(Request $request, Level $level)
     {
-        //
+        // 1. Validation des données
+        $request->validate([
+            'level' => 'required|string|max:255',
+            'description' => 'required|string|max:500',
+        ], [
+            'level.required' => 'Le nom du niveau est obligatoire.',
+            'level.max' => 'Le nom du niveau ne peut pas dépasser 255 caractères.',
+            'description.required' => 'La description est obligatoire.',
+            'description.max' => 'La description ne peut pas dépasser 500 caractères.',
+        ]);
+
+        // 2. Mise à jour de l'enregistrement
+        $level->update([
+            'level' => $request->input('level'),
+            'description' => $request->input('description'),
+        ]);
+
+        // 3. Redirection
+        return redirect()->route('levels.index')
+                         ->with('success', 'Niveau mis à jour avec succès.');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Supprime la ressource spécifiée de la base de données (DELETE).
      */
-    public function destroy(Level $levels)
+    public function destroy(Level $level)
     {
-        //
+        // Vérification de sécurité : empêcher la suppression si des agents sont associés
+        if ($level->agents()->count() > 0) {
+            return redirect()->route('levels.index')
+                             ->with('error', 'Impossible de supprimer ce niveau car des agents y sont associés.');
+        }
+
+        $level->delete();
+
+        return redirect()->route('levels.index')
+                         ->with('success', 'Niveau supprimé avec succès.');
     }
 }

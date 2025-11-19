@@ -20,9 +20,9 @@ class Level extends Model
     // {
     //     return $this->hasOne(Subject::class);
     // }
-    
-        public function agents()
+
+    public function agents()
     {
-        return $this->belongsTo(Agent::class);
+        return $this->hasMany(Agent::class, 'level_id');
     }
 }
