@@ -4,7 +4,7 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Nouvelle Discussion') }}
             </h2>
-            <a href="{{ route('discuss.index') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+            <a href="{{ route('dashboard.discuss.index') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
                 Annuler
             </a>
         </div>
@@ -28,7 +28,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     
-                    <form action="{{ route('discuss.store') }}" method="POST" class="space-y-6">
+                    <form action="{{ route('dashboard.discuss.store') }}" method="POST" class="space-y-6">
                         @csrf
 
                         <!-- Sélection de l'agent -->

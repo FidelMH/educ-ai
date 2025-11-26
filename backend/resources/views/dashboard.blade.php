@@ -84,7 +84,7 @@
         </div>
 
         <div style="margin-top: 30px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-            <a href="{{ route('agents.index') }}" style="text-decoration: none;">
+            <a href="{{ route('dashboard.agents.index') }}" style="text-decoration: none;">
                 <div style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); text-align: center; transition: transform 0.2s;">
                     <div style="font-size: 48px; margin-bottom: 15px;">🤖</div>
                     <h3 style="color: #333; margin-bottom: 10px;">Gestion des Agents</h3>
@@ -92,7 +92,7 @@
                 </div>
             </a>
 
-            <a href="{{ route('roles.index') }}" style="text-decoration: none;">
+            <a href="{{ route('dashboard.roles.index') }}" style="text-decoration: none;">
                 <div style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); text-align: center; transition: transform 0.2s;">
                     <div style="font-size: 48px; margin-bottom: 15px;">👥</div>
                     <h3 style="color: #333; margin-bottom: 10px;">Gestion des Rôles</h3>
@@ -100,7 +100,7 @@
                 </div>
             </a>
 
-            <a href="{{ route('levels.index') }}" style="text-decoration: none;">
+            <a href="{{ route('dashboard.levels.index') }}" style="text-decoration: none;">
                 <div style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); text-align: center; transition: transform 0.2s;">
                     <div style="font-size: 48px; margin-bottom: 15px;">📊</div>
                     <h3 style="color: #333; margin-bottom: 10px;">Gestion des Niveaux</h3>
@@ -108,7 +108,7 @@
                 </div>
             </a>
 
-            <a href="{{ route('users.index') }}" style="text-decoration: none;">
+            <a href="{{ route('dashboard.users.index') }}" style="text-decoration: none;">
                 <div style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); text-align: center; transition: transform 0.2s;">
                     <div style="font-size: 48px; margin-bottom: 15px;">👤</div>
                     <h3 style="color: #333; margin-bottom: 10px;">Gestion des Utilisateurs</h3>
@@ -116,7 +116,7 @@
                 </div>
             </a>
 
-            <a href="{{ route('subjects.index') }}" style="text-decoration: none;">
+            <a href="{{ route('dashboard.subjects.index') }}" style="text-decoration: none;">
                 <div style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); text-align: center; transition: transform 0.2s;">
                     <div style="font-size: 48px; margin-bottom: 15px;">📚</div>
                     <h3 style="color: #333; margin-bottom: 10px;">Gestion des Matières</h3>

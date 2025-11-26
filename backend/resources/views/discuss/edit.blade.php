@@ -4,7 +4,7 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Modifier la discussion #') . $discuss->id }}
             </h2>
-            <a href="{{ route('discuss.index') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+            <a href="{{ route('dashboard.discuss.index') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
                 Retour à la liste
             </a>
         </div>
@@ -29,7 +29,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     
-                    <form action="{{ route('discuss.update', $discuss) }}" method="POST" class="space-y-6">
+                    <form action="{{ route('dashboard.discuss.update', $discuss) }}" method="POST" class="space-y-6">
                         @csrf
                         @method('PUT')
 
@@ -57,7 +57,7 @@
 
                         <!-- Actions du formulaire -->
                         <div class="flex items-center justify-end gap-4 border-t border-gray-100 pt-4">
-                            <a href="{{ route('discuss.index') }}" class="text-sm text-gray-600 hover:text-gray-900 underline">
+                            <a href="{{ route('dashboard.discuss.index') }}" class="text-sm text-gray-600 hover:text-gray-900 underline">
                                 Annuler
                             </a>
                             

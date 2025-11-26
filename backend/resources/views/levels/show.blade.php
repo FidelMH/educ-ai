@@ -5,10 +5,10 @@
                 {{ __('Détails du Niveau') }}
             </h2>
             <div class="space-x-2">
-                <a href="{{ route('levels.edit', $level) }}" class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
+                <a href="{{ route('dashboard.levels.edit', $level) }}" class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
                     Modifier
                 </a>
-                <a href="{{ route('levels.index') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+                <a href="{{ route('dashboard.levels.index') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
                     Retour à la liste
                 </a>
             </div>
@@ -93,7 +93,7 @@
                                                     {{ $user->created_at ? $user->created_at->format('d/m/Y') : 'N/A' }}
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                                    <a href="{{ route('users.show', $user) }}" class="text-blue-600 hover:text-blue-900">
+                                                    <a href="{{ route('dashboard.users.show', $user) }}" class="text-blue-600 hover:text-blue-900">
                                                         Voir
                                                     </a>
                                                 </td>
@@ -114,7 +114,7 @@
 
                     <!-- Actions -->
                     <div class="border-t pt-6 mt-8 flex justify-between items-center">
-                        <form action="{{ route('levels.destroy', $level) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce niveau ? Cette action est irréversible.');">
+                        <form action="{{ route('dashboard.levels.destroy', $level) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce niveau ? Cette action est irréversible.');">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
@@ -123,7 +123,7 @@
                         </form>
 
                         <div class="space-x-2">
-                            <a href="{{ route('levels.edit', $level) }}" class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
+                            <a href="{{ route('dashboard.levels.edit', $level) }}" class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
                                 Modifier
                             </a>
                         </div>

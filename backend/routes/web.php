@@ -8,12 +8,12 @@ use App\Http\Controllers\RolesController;
 use App\Http\Controllers\LevelsController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\DiscussController;
-
+use App\Http\Controllers\MessagesController;
 use App\Http\Controllers\SubjectsController;
 
-// Redirection de la page d'accueil vers login
+// Home page
 Route::get('/', function () {
-    return redirect()->route('login');
+    return view('home');
 });
 
 // Routes d'authentification
@@ -26,18 +26,23 @@ Route::post('/register', [RegisterController::class, 'store']);
 
 // Routes protégées par authentification
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-
     Route::get('/profile', function () {
         return view('profile.edit');
     })->name('profile.edit');
 
-    Route::resource('agents', AgentController::class);
-    Route::resource('roles', RolesController::class);
-    Route::resource('levels', LevelsController::class);
-    Route::resource('users', UsersController::class);
-    Route::resource('subjects', SubjectsController::class);
-    Route::resource('discuss', DiscussController::class);
+    Route::post('messages', [MessagesController::class, 'store'])->name('messages.store');
+
+    // Admin-only Dashboard routes
+    Route::middleware('admin')->prefix('dashboard')->name('dashboard.')->group(function () {
+        Route::get('/', function () {
+            return view('dashboard');
+        })->name('index'); // Becomes dashboard.index
+
+        Route::resource('agents', AgentController::class);
+        Route::resource('roles', RolesController::class);
+        Route::resource('levels', LevelsController::class);
+        Route::resource('users', UsersController::class);
+        Route::resource('subjects', SubjectsController::class);
+        Route::resource('discuss', DiscussController::class);
+    });
 });

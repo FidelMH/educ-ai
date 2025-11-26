@@ -4,7 +4,7 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Gestion des Utilisateurs') }}
             </h2>
-            <a href="{{ route('users.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            <a href="{{ route('dashboard.users.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 Créer un utilisateur
             </a>
         </div>
@@ -88,14 +88,14 @@
                                                 {{ $user->created_at ? $user->created_at->format('d/m/Y') : 'N/A' }}
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
-                                                <a href="{{ route('users.show', $user) }}" class="text-blue-600 hover:text-blue-900">
+                                                <a href="{{ route('dashboard.users.show', $user) }}" class="text-blue-600 hover:text-blue-900">
                                                     Voir
                                                 </a>
-                                                <a href="{{ route('users.edit', $user) }}" class="text-indigo-600 hover:text-indigo-900">
+                                                <a href="{{ route('dashboard.users.edit', $user) }}" class="text-indigo-600 hover:text-indigo-900">
                                                     Modifier
                                                 </a>
                                                 @if($user->id !== auth()->id())
-                                                    <form action="{{ route('users.destroy', $user) }}" method="POST" class="inline-block" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">
+                                                    <form action="{{ route('dashboard.users.destroy', $user) }}" method="POST" class="inline-block" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="text-red-600 hover:text-red-900">
@@ -117,7 +117,7 @@
                     @else
                         <div class="text-center py-8">
                             <p class="text-gray-500 mb-4">Aucun utilisateur trouvé.</p>
-                            <a href="{{ route('users.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            <a href="{{ route('dashboard.users.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                 Créer le premier utilisateur
                             </a>
                         </div>

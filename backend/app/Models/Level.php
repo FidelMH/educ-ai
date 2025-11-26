@@ -25,4 +25,9 @@ class Level extends Model
     {
         return $this->belongsToMany(User::class, 'levels_users');
     }
+
+    public function agents()
+    {
+        return $this->hasMany(Agent::class);
+    }
 }

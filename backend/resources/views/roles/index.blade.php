@@ -4,7 +4,7 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Gestion des Rôles') }}
             </h2>
-            <a href="{{ route('roles.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            <a href="{{ route('dashboard.roles.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 Créer un rôle
             </a>
         </div>
@@ -68,13 +68,13 @@
                                                 {{ $role->created_at ? $role->created_at->format('d/m/Y') : 'N/A' }}
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
-                                                <a href="{{ route('roles.show', $role) }}" class="text-blue-600 hover:text-blue-900">
+                                                <a href="{{ route('dashboard.roles.show', $role) }}" class="text-blue-600 hover:text-blue-900">
                                                     Voir
                                                 </a>
-                                                <a href="{{ route('roles.edit', $role) }}" class="text-indigo-600 hover:text-indigo-900">
+                                                <a href="{{ route('dashboard.roles.edit', $role) }}" class="text-indigo-600 hover:text-indigo-900">
                                                     Modifier
                                                 </a>
-                                                <form action="{{ route('roles.destroy', $role) }}" method="POST" class="inline-block" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce rôle ?');">
+                                                <form action="{{ route('dashboard.roles.destroy', $role) }}" method="POST" class="inline-block" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce rôle ?');">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="text-red-600 hover:text-red-900">
@@ -95,7 +95,7 @@
                     @else
                         <div class="text-center py-8">
                             <p class="text-gray-500 mb-4">Aucun rôle trouvé.</p>
-                            <a href="{{ route('roles.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            <a href="{{ route('dashboard.roles.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                 Créer le premier rôle
                             </a>
                         </div>

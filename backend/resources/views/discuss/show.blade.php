@@ -10,10 +10,10 @@
                 </p>
             </div>
             <div class="flex space-x-2">
-                <a href="{{ route('discuss.edit', $discuss) }}" class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded text-sm">
+                <a href="{{ route('dashboard.discuss.edit', $discuss) }}" class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded text-sm">
                     Modifier Agent
                 </a>
-                <a href="{{ route('discuss.index') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded text-sm">
+                <a href="{{ route('dashboard.discuss.index') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded text-sm">
                     Retour
                 </a>
             </div>

@@ -5,10 +5,10 @@
                 {{ __('Détails de l\'Agent') }} #{{ $agent->id }}
             </h2>
             <div class="space-x-2">
-                <a href="{{ route('agents.edit', $agent) }}" class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
+                <a href="{{ route('dashboard.agents.edit', $agent) }}" class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
                     Modifier
                 </a>
-                <a href="{{ route('agents.index') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+                <a href="{{ route('dashboard.agents.index') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
                     Retour à la liste
                 </a>
             </div>
@@ -60,7 +60,7 @@
 
                         <!-- Actions -->
                         <div class="flex items-center justify-between pt-4">
-                            <form action="{{ route('agents.destroy', $agent) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet agent ?');">
+                            <form action="{{ route('dashboard.agents.destroy', $agent) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet agent ?');">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
@@ -68,7 +68,7 @@
                                 </button>
                             </form>
 
-                            <a href="{{ route('agents.edit', $agent) }}" class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
+                            <a href="{{ route('dashboard.agents.edit', $agent) }}" class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
                                 Modifier
                             </a>
                         </div>

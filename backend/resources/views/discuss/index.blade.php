@@ -4,7 +4,7 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Gestion des Discussions') }}
             </h2>
-            <a href="{{ route('discuss.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            <a href="{{ route('dashboard.discuss.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 + Nouvelle Discussion
             </a>
         </div>
@@ -60,15 +60,15 @@
                                                 {{ $discuss->created_at->format('d/m/Y à H:i') }}
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
-                                                <a href="{{ route('discuss.show', $discuss) }}" class="text-green-600 hover:text-green-900 font-bold">
+                                                <a href="{{ route('dashboard.discuss.show', $discuss) }}" class="text-green-600 hover:text-green-900 font-bold">
                                                     Voir
                                                 </a>
                                                 <span class="text-gray-300">|</span>
-                                                <a href="{{ route('discuss.edit', $discuss) }}" class="text-indigo-600 hover:text-indigo-900">
+                                                <a href="{{ route('dashboard.discuss.edit', $discuss) }}" class="text-indigo-600 hover:text-indigo-900">
                                                     Modifier
                                                 </a>
                                                 <span class="text-gray-300">|</span>
-                                                <form action="{{ route('discuss.destroy', $discuss) }}" method="POST" class="inline-block" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer définitivement cette discussion ?');">
+                                                <form action="{{ route('dashboard.discuss.destroy', $discuss) }}" method="POST" class="inline-block" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer définitivement cette discussion ?');">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="text-red-600 hover:text-red-900">
@@ -89,7 +89,7 @@
                     @else
                         <div class="text-center py-12 bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
                             <p class="text-gray-500 mb-4 text-lg">Aucune discussion trouvée.</p>
-                            <a href="{{ route('discuss.create') }}" class="inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                            <a href="{{ route('dashboard.discuss.create') }}" class="inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
                                 Créer la première discussion
                             </a>
                         </div>

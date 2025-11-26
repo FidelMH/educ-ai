@@ -4,7 +4,7 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Gestion des Agents') }}
             </h2>
-            <a href="{{ route('agents.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            <a href="{{ route('dashboard.agents.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 Créer un agent
             </a>
         </div>
@@ -53,13 +53,13 @@
                                                 {{ $agent->subject->theme ?? 'N/A' }}
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
-                                                <a href="{{ route('agents.show', $agent) }}" class="text-blue-600 hover:text-blue-900">
+                                                <a href="{{ route('dashboard.agents.show', $agent) }}" class="text-blue-600 hover:text-blue-900">
                                                     Voir
                                                 </a>
-                                                <a href="{{ route('agents.edit', $agent) }}" class="text-indigo-600 hover:text-indigo-900">
+                                                <a href="{{ route('dashboard.agents.edit', $agent) }}" class="text-indigo-600 hover:text-indigo-900">
                                                     Modifier
                                                 </a>
-                                                <form action="{{ route('agents.destroy', $agent) }}" method="POST" class="inline-block" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet agent ?');">
+                                                <form action="{{ route('dashboard.agents.destroy', $agent) }}" method="POST" class="inline-block" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet agent ?');">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="text-red-600 hover:text-red-900">
@@ -80,7 +80,7 @@
                     @else
                         <div class="text-center py-8">
                             <p class="text-gray-500 mb-4">Aucun agent trouvé.</p>
-                            <a href="{{ route('agents.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            <a href="{{ route('dashboard.agents.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                 Créer le premier agent
                             </a>
                         </div>

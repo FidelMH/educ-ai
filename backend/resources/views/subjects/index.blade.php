@@ -4,7 +4,7 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Gestion des Matières') }}
             </h2>
-            <a href="{{ route('subjects.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            <a href="{{ route('dashboard.subjects.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 Créer une matière
             </a>
         </div>
@@ -46,13 +46,13 @@
                                                 {{ $subject->theme }}
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
-                                                <a href="{{ route('subjects.show', $subject) }}" class="text-blue-600 hover:text-blue-900">
+                                                <a href="{{ route('dashboard.subjects.show', $subject) }}" class="text-blue-600 hover:text-blue-900">
                                                     Voir
                                                 </a>
-                                                <a href="{{ route('subjects.edit', $subject) }}" class="text-indigo-600 hover:text-indigo-900">
+                                                <a href="{{ route('dashboard.subjects.edit', $subject) }}" class="text-indigo-600 hover:text-indigo-900">
                                                     Modifier
                                                 </a>
-                                                <form action="{{ route('subjects.destroy', $subject) }}" method="POST" class="inline-block" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette matière ?');">
+                                                <form action="{{ route('dashboard.subjects.destroy', $subject) }}" method="POST" class="inline-block" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette matière ?');">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="text-red-600 hover:text-red-900">
@@ -72,7 +72,7 @@
                     @else
                         <div class="text-center py-8">
                             <p class="text-gray-500 mb-4">Aucune matière trouvée.</p>
-                            <a href="{{ route('subjects.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            <a href="{{ route('dashboard.subjects.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                 Créer la première matière
                             </a>
                         </div>

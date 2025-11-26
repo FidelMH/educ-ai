@@ -4,7 +4,7 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Gestion des Niveaux') }}
             </h2>
-            <a href="{{ route('levels.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            <a href="{{ route('dashboard.levels.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 Créer un niveau
             </a>
         </div>
@@ -74,13 +74,13 @@
                                                 {{ $level->created_at ? $level->created_at->format('d/m/Y') : 'N/A' }}
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
-                                                <a href="{{ route('levels.show', $level) }}" class="text-blue-600 hover:text-blue-900">
+                                                <a href="{{ route('dashboard.levels.show', $level) }}" class="text-blue-600 hover:text-blue-900">
                                                     Voir
                                                 </a>
-                                                <a href="{{ route('levels.edit', $level) }}" class="text-indigo-600 hover:text-indigo-900">
+                                                <a href="{{ route('dashboard.levels.edit', $level) }}" class="text-indigo-600 hover:text-indigo-900">
                                                     Modifier
                                                 </a>
-                                                <form action="{{ route('levels.destroy', $level) }}" method="POST" class="inline-block" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce niveau ?');">
+                                                <form action="{{ route('dashboard.levels.destroy', $level) }}" method="POST" class="inline-block" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce niveau ?');">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="text-red-600 hover:text-red-900">
@@ -101,7 +101,7 @@
                     @else
                         <div class="text-center py-8">
                             <p class="text-gray-500 mb-4">Aucun niveau trouvé.</p>
-                            <a href="{{ route('levels.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            <a href="{{ route('dashboard.levels.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                 Créer le premier niveau
                             </a>
                         </div>

@@ -15,6 +15,8 @@ class UsersController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny', User::class);
+
         // Précharge la relation role pour éviter le problème N+1
         $users = User::with('role')->latest()->paginate(10);
 
@@ -26,6 +28,8 @@ class UsersController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', User::class);
+
         $roles = Role::all();
         return view('users.create', compact('roles'));
     }
@@ -35,6 +39,8 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', User::class);
+
         // 1. Validation des données
         $request->validate([
             'firstname' => 'required|string|max:255',
@@ -61,7 +67,7 @@ class UsersController extends Controller
             'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
             'roles_id' => $request->input('roles_id'),
-            'consentement' => $request->has('consentement'),
+            'consentement' => $request->boolean('consentement'),
         ]);
 
         // 3. Redirection
@@ -74,6 +80,8 @@ class UsersController extends Controller
      */
     public function show(User $user) // Route Model Binding
     {
+        $this->authorize('view', $user);
+
         // Charge les relations pour l'affichage détaillé
         $user->load(['role', 'messages',]);
 
@@ -85,6 +93,8 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
+        $this->authorize('update', $user);
+
         $roles = Role::all();
         return view('users.edit', compact('user', 'roles'));
     }
@@ -94,6 +104,8 @@ class UsersController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        $this->authorize('update', $user);
+
         // 1. Validation des données (ignore l'utilisateur actuel pour la règle unique)
         $request->validate([
             'firstname' => 'required|string|max:255',
@@ -118,7 +130,7 @@ class UsersController extends Controller
             'lastname' => $request->input('lastname'),
             'email' => $request->input('email'),
             'roles_id' => $request->input('roles_id'),
-            'consentement' => $request->has('consentement'),
+            'consentement' => $request->boolean('consentement'),
         ];
 
         // Mettre à jour le mot de passe uniquement s'il est fourni
@@ -138,11 +150,7 @@ class UsersController extends Controller
      */
     public function destroy(User $user)
     {
-        // Empêcher la suppression de son propre compte
-        if ($user->id === auth()->id()) {
-            return redirect()->route('users.index')
-                             ->with('error', 'Vous ne pouvez pas supprimer votre propre compte.');
-        }
+        $this->authorize('delete', $user);
 
         $user->delete();
 

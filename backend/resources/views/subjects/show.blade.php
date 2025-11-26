@@ -27,10 +27,10 @@
                     </div>
 
                     <div class="flex items-center justify-end mt-4">
-                        <a href="{{ route('subjects.index') }}" class="text-sm text-gray-600 hover:text-gray-900 mr-4">
+                        <a href="{{ route('dashboard.subjects.index') }}" class="text-sm text-gray-600 hover:text-gray-900 mr-4">
                             {{ __('Retour à la liste') }}
                         </a>
-                        <a href="{{ route('subjects.edit', $subject) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        <a href="{{ route('dashboard.subjects.edit', $subject) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                             {{ __('Modifier') }}
                         </a>
                     </div>

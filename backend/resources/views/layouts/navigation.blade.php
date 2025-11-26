@@ -5,29 +5,32 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('dashboard.index') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('dashboard.index')" :active="request()->routeIs('dashboard.index')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('agents.index')" :active="request()->routeIs('agents.*')">
+                    <x-nav-link :href="route('dashboard.agents.index')" :active="request()->routeIs('dashboard.agents.*')">
                         {{ __('Agents') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('discuss.index')" :active="request()->routeIs('discuss.*')">
+                    <x-nav-link :href="route('dashboard.discuss.index')" :active="request()->routeIs('dashboard.discuss.*')">
                         {{ __('Discussions') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('roles.index')" :active="request()->routeIs('roles.*')">
+                    <x-nav-link :href="route('dashboard.roles.index')" :active="request()->routeIs('dashboard.roles.*')">
                         {{ __('Rôles') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('levels.index')" :active="request()->routeIs('levels.*')">
+                    <x-nav-link :href="route('dashboard.levels.index')" :active="request()->routeIs('dashboard.levels.*')">
                         {{ __('Niveaux') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
+                    <x-nav-link :href="route('dashboard.subjects.index')" :active="request()->routeIs('dashboard.subjects.*')">
+                        {{ __('Matières') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('dashboard.users.index')" :active="request()->routeIs('dashboard.users.*')">
                         {{ __('Utilisateurs') }}
                     </x-nav-link>
                 </div>
@@ -82,19 +85,22 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+            <x-responsive-nav-link :href="route('dashboard.index')" :active="request()->routeIs('dashboard.index')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('agents.index')" :active="request()->routeIs('agents.*')">
+            <x-responsive-nav-link :href="route('dashboard.agents.index')" :active="request()->routeIs('dashboard.agents.*')">
                 {{ __('Agents') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('roles.index')" :active="request()->routeIs('roles.*')">
+            <x-responsive-nav-link :href="route('dashboard.roles.index')" :active="request()->routeIs('dashboard.roles.*')">
                 {{ __('Rôles') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('levels.index')" :active="request()->routeIs('levels.*')">
+            <x-responsive-nav-link :href="route('dashboard.levels.index')" :active="request()->routeIs('dashboard.levels.*')">
                 {{ __('Niveaux') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
+            <x-responsive-nav-link :href="route('dashboard.subjects.index')" :active="request()->routeIs('dashboard.subjects.*')">
+                {{ __('Matières') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('dashboard.users.index')" :active="request()->routeIs('dashboard.users.*')">
                 {{ __('Utilisateurs') }}
             </x-responsive-nav-link>
         </div>
