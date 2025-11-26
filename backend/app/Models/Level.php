@@ -11,10 +11,10 @@ class Level extends Model
         'level',
     ];
 
-    public function has()
-    {
-        return $this->hasOne(Has::class);
-    }
+    // public function has()
+    // {
+    //     return $this->hasOne(Has::class);
+    // }
 
     // public function subjects()
     // {
@@ -23,6 +23,6 @@ class Level extends Model
 
     public function users()
     {
-        return $this->hasMany(User::class, 'level_id');
+        return $this->belongsToMany(User::class, 'levels_users');
     }
 }

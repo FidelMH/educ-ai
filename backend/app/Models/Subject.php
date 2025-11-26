@@ -10,9 +10,9 @@ class Subject extends Model
         'theme',
     ];
 
-    public function studies()
+    public function users()
     {
-        return $this->hasMany(Study::class);
+        return $this->belongsToMany(User::class);
     }
 
     public function agent()

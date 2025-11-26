@@ -75,7 +75,7 @@ class UsersController extends Controller
     public function show(User $user) // Route Model Binding
     {
         // Charge les relations pour l'affichage détaillé
-        $user->load(['role', 'messages', 'studies']);
+        $user->load(['role', 'messages',]);
 
         return view('users.show', compact('user'));
     }

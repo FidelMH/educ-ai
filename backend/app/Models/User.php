@@ -56,14 +56,14 @@ class User extends Authenticatable
         return "{$this->firstname} {$this->lastname}";
     }
 
-    public function has()
-    {
-        return $this->hasMany(Has::class);
-    }
+    // public function has()
+    // {
+    //     return $this->hasMany(Has::class);
+    // }
 
-    public function studies()
+    public function subjects()
     {
-        return $this->hasMany(Study::class);
+        return $this->belongsToMany(Subject::class);
     }
 
     public function role()
@@ -71,11 +71,10 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class, 'roles_id');    
     }
 
-    public function level()
-    {
-        return $this->belongsTo(Level::class, 'level_id');
-    }
-
+       public function levels()
+       {
+           return $this->belongsToMany(Level::class, 'levels_users');
+       }
     public function messages(){
         return $this->hasMany(Message::class);
     }
