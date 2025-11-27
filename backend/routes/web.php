@@ -30,6 +30,11 @@ Route::middleware('auth')->group(function () {
         return view('profile.edit');
     })->name('profile.edit');
 
+    // Chat route (requires authentication)
+    Route::get('/chat', function () {
+        return view('chat');
+    })->name('chat');
+
     // Admin-only Dashboard routes
     Route::middleware('admin')->prefix('dashboard')->name('dashboard.')->group(function () {
         Route::get('/', function () {

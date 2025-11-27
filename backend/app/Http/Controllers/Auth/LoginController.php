@@ -29,8 +29,14 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
-            
-            return redirect()->intended('/dashboard')->with('success', 'Connexion réussie !');
+
+            // Redirect based on user role
+            $user = Auth::user();
+            if ($user->role && $user->role->role === 'admin') {
+                return redirect()->intended(route('dashboard.index'))->with('success', 'Connexion réussie !');
+            }
+
+            return redirect()->intended('/')->with('success', 'Connexion réussie !');
         }
 
         // Si échec
