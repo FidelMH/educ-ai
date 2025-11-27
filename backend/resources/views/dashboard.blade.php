@@ -67,7 +67,7 @@
 <body>
     <nav class="navbar">
         <a href="/" style="text-decoration: none; color: #333;">
-            <h2>🏠 Mon Application</h2>
+            <h2>Mon Application</h2>
         </a>
         <div class="user-info">
             <span>Bonjour, {{ auth()->user()->firstname }} {{ auth()->user()->lastname }}</span>
