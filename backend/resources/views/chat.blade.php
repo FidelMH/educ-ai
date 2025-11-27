@@ -300,36 +300,63 @@
     </div>
 
     <!-- New Chat Modal -->
-    <div id="newChatModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
-        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
-            <div class="mt-3">
-                <h3 class="text-lg font-semibold text-gray-900 mb-4">Nouvelle conversation</h3>
-                <p class="text-sm text-gray-600 mb-4">Choisissez un assistant spécialisé :</p>
+    <div id="newChatModal" class="hidden fixed inset-0 bg-black bg-opacity-50 overflow-y-auto h-full w-full z-50 flex items-center justify-center p-4">
+        <div class="relative bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[85vh] overflow-hidden">
+            <!-- Modal Header -->
+            <div class="bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-5">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-2xl font-bold text-white">Choisissez votre assistant</h3>
+                        <p class="text-blue-100 text-sm mt-1">Sélectionnez la matière pour laquelle vous souhaitez de l'aide</p>
+                    </div>
+                    <button type="button" onclick="closeNewChatModal()" class="text-white hover:text-blue-100 transition">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
 
-                <form action="{{ route('chat.store') }}" method="POST">
-                    @csrf
-                    <div class="space-y-2 max-h-96 overflow-y-auto mb-4">
+            <!-- Modal Body -->
+            <form action="{{ route('chat.store') }}" method="POST">
+                @csrf
+                <div class="p-6 max-h-[calc(85vh-180px)] overflow-y-auto">
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
                         @foreach($agents as $agent)
-                            <label class="flex items-start p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-blue-50 hover:border-blue-500 transition">
-                                <input type="radio" name="agent_id" value="{{ $agent->id }}" class="mt-1 mr-3" required>
-                                <div class="flex-1">
-                                    <div class="font-semibold text-gray-800">{{ $agent->subject->theme ?? 'Général' }}</div>
-                                    <div class="text-xs text-gray-500 mt-1">{{ Str::limit($agent->prompt, 60) }}</div>
+                            <label class="group relative cursor-pointer">
+                                <input type="radio" name="agent_id" value="{{ $agent->id }}" class="peer sr-only" required>
+                                <div class="bg-gradient-to-br from-gray-50 to-gray-100 border-2 border-gray-200 rounded-xl p-4 transition-all duration-200 peer-checked:border-blue-500 peer-checked:bg-gradient-to-br peer-checked:from-blue-50 peer-checked:to-blue-100 peer-checked:shadow-lg hover:shadow-md hover:border-gray-300">
+                                    <!-- Icon -->
+                                    <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                        </svg>
+                                    </div>
+                                    <!-- Content -->
+                                    <h4 class="font-bold text-gray-900 text-sm mb-2 line-clamp-2">{{ $agent->subject->theme ?? 'Général' }}</h4>
+                                    <p class="text-xs text-gray-600 line-clamp-2">{{ Str::limit($agent->prompt, 50) }}</p>
+                                    <!-- Check indicator -->
+                                    <div class="absolute top-3 right-3 w-5 h-5 rounded-full border-2 border-gray-300 bg-white peer-checked:border-blue-500 peer-checked:bg-blue-500 flex items-center justify-center transition-all">
+                                        <svg class="w-3 h-3 text-white hidden peer-checked:block" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
                                 </div>
                             </label>
                         @endforeach
                     </div>
+                </div>
 
-                    <div class="flex justify-end space-x-3">
-                        <button type="button" onclick="closeNewChatModal()" class="px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400">
-                            Annuler
-                        </button>
-                        <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-                            Créer
-                        </button>
-                    </div>
-                </form>
-            </div>
+                <!-- Modal Footer -->
+                <div class="bg-gray-50 px-6 py-4 flex justify-end space-x-3 border-t border-gray-200">
+                    <button type="button" onclick="closeNewChatModal()" class="px-5 py-2.5 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 font-medium transition">
+                        Annuler
+                    </button>
+                    <button type="submit" class="px-5 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium shadow-sm transition">
+                        Démarrer la conversation
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 
