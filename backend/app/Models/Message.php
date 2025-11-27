@@ -6,9 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Message extends Model
 {
-     protected $fillable = [
+    protected $fillable = [
         'type_message',
         'message',
+        'user_id',
+        'discuss_id',
+        'agent_id',
     ];
 
     public function discuss()
@@ -16,8 +19,13 @@ class Message extends Model
         return $this->belongsTo(Discuss::class);
     }
 
-    public function users()
+    public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function agent()
+    {
+        return $this->belongsTo(Agent::class);
     }
 }

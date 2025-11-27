@@ -30,8 +30,6 @@ Route::middleware('auth')->group(function () {
         return view('profile.edit');
     })->name('profile.edit');
 
-    Route::post('messages', [MessagesController::class, 'store'])->name('messages.store');
-
     // Admin-only Dashboard routes
     Route::middleware('admin')->prefix('dashboard')->name('dashboard.')->group(function () {
         Route::get('/', function () {
@@ -44,5 +42,6 @@ Route::middleware('auth')->group(function () {
         Route::resource('users', UsersController::class);
         Route::resource('subjects', SubjectsController::class);
         Route::resource('discuss', DiscussController::class);
+        Route::resource('messages', MessagesController::class);
     });
 });

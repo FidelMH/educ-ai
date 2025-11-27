@@ -21,6 +21,9 @@
                     <x-nav-link :href="route('dashboard.discuss.index')" :active="request()->routeIs('dashboard.discuss.*')">
                         {{ __('Discussions') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('dashboard.messages.index')" :active="request()->routeIs('dashboard.messages.*')">
+                        {{ __('Messages') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('dashboard.roles.index')" :active="request()->routeIs('dashboard.roles.*')">
                         {{ __('Rôles') }}
                     </x-nav-link>
@@ -90,6 +93,12 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('dashboard.agents.index')" :active="request()->routeIs('dashboard.agents.*')">
                 {{ __('Agents') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('dashboard.discuss.index')" :active="request()->routeIs('dashboard.discuss.*')">
+                {{ __('Discussions') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('dashboard.messages.index')" :active="request()->routeIs('dashboard.messages.*')">
+                {{ __('Messages') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('dashboard.roles.index')" :active="request()->routeIs('dashboard.roles.*')">
                 {{ __('Rôles') }}

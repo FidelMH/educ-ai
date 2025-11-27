@@ -66,7 +66,9 @@
 </head>
 <body>
     <nav class="navbar">
-        <h2>Mon Application</h2>
+        <a href="/" style="text-decoration: none; color: #333;">
+            <h2>🏠 Mon Application</h2>
+        </a>
         <div class="user-info">
             <span>Bonjour, {{ auth()->user()->firstname }} {{ auth()->user()->lastname }}</span>
             <form method="POST" action="{{ route('logout') }}">
@@ -92,6 +94,22 @@
                 </div>
             </a>
 
+            <a href="{{ route('dashboard.discuss.index') }}" style="text-decoration: none;">
+                <div style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); text-align: center; transition: transform 0.2s;">
+                    <div style="font-size: 48px; margin-bottom: 15px;">💬</div>
+                    <h3 style="color: #333; margin-bottom: 10px;">Gestion des Discussions</h3>
+                    <p style="color: #666; font-size: 14px;">Gérer les discussions avec les agents</p>
+                </div>
+            </a>
+
+            <a href="{{ route('dashboard.messages.index') }}" style="text-decoration: none;">
+                <div style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); text-align: center; transition: transform 0.2s;">
+                    <div style="font-size: 48px; margin-bottom: 15px;">✉️</div>
+                    <h3 style="color: #333; margin-bottom: 10px;">Gestion des Messages</h3>
+                    <p style="color: #666; font-size: 14px;">Consulter et gérer tous les messages</p>
+                </div>
+            </a>
+
             <a href="{{ route('dashboard.roles.index') }}" style="text-decoration: none;">
                 <div style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); text-align: center; transition: transform 0.2s;">
                     <div style="font-size: 48px; margin-bottom: 15px;">👥</div>
@@ -108,19 +126,19 @@
                 </div>
             </a>
 
-            <a href="{{ route('dashboard.users.index') }}" style="text-decoration: none;">
-                <div style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); text-align: center; transition: transform 0.2s;">
-                    <div style="font-size: 48px; margin-bottom: 15px;">👤</div>
-                    <h3 style="color: #333; margin-bottom: 10px;">Gestion des Utilisateurs</h3>
-                    <p style="color: #666; font-size: 14px;">Gérer les comptes utilisateurs</p>
-                </div>
-            </a>
-
             <a href="{{ route('dashboard.subjects.index') }}" style="text-decoration: none;">
                 <div style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); text-align: center; transition: transform 0.2s;">
                     <div style="font-size: 48px; margin-bottom: 15px;">📚</div>
                     <h3 style="color: #333; margin-bottom: 10px;">Gestion des Matières</h3>
                     <p style="color: #666; font-size: 14px;">Gérer les matières d'étude</p>
+                </div>
+            </a>
+
+            <a href="{{ route('dashboard.users.index') }}" style="text-decoration: none;">
+                <div style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); text-align: center; transition: transform 0.2s;">
+                    <div style="font-size: 48px; margin-bottom: 15px;">👤</div>
+                    <h3 style="color: #333; margin-bottom: 10px;">Gestion des Utilisateurs</h3>
+                    <p style="color: #666; font-size: 14px;">Gérer les comptes utilisateurs</p>
                 </div>
             </a>
         </div>
