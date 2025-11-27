@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Discuss extends Model
 {
-    // 1. Autoriser l'assignation de masse pour l'agent_id
-    protected $fillable = ['agent_id'];
+    // 1. Autoriser l'assignation de masse pour l'agent_id et user_id
+    protected $fillable = ['agent_id', 'user_id'];
 
     public function messages()
     {
@@ -18,5 +18,10 @@ class Discuss extends Model
     public function agent()
     {
         return $this->belongsTo(Agent::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

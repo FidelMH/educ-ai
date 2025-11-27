@@ -10,6 +10,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\DiscussController;
 use App\Http\Controllers\MessagesController;
 use App\Http\Controllers\SubjectsController;
+use App\Http\Controllers\ChatController;
 
 // Home page
 Route::get('/', function () {
@@ -30,10 +31,15 @@ Route::middleware('auth')->group(function () {
         return view('profile.edit');
     })->name('profile.edit');
 
-    // Chat route (requires authentication)
-    Route::get('/chat', function () {
-        return view('chat');
-    })->name('chat');
+    /*
+    |--------------------------------------------------------------------------
+    | User-Facing Chat Routes
+    |--------------------------------------------------------------------------
+    */
+    Route::get('/chat/{discuss?}', [ChatController::class, 'index'])->name('chat');
+    Route::post('/chat/create', [ChatController::class, 'store'])->name('chat.store');
+    Route::delete('/chat/{discuss}', [ChatController::class, 'destroy'])->name('chat.destroy');
+    Route::post('/chat/{discuss}/message', [ChatController::class, 'message'])->name('chat.message');
 
     // Admin-only Dashboard routes
     Route::middleware('admin')->prefix('dashboard')->name('dashboard.')->group(function () {
