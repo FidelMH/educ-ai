@@ -11,6 +11,7 @@ use App\Http\Controllers\DiscussController;
 use App\Http\Controllers\MessagesController;
 use App\Http\Controllers\SubjectsController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\ProfileController;
 
 // Home page
 Route::get('/', function () {
@@ -27,9 +28,14 @@ Route::post('/register', [RegisterController::class, 'store']);
 
 // Routes protégées par authentification
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', function () {
-        return view('profile.edit');
-    })->name('profile.edit');
+    /*
+    |--------------------------------------------------------------------------
+    | Profile Routes
+    |--------------------------------------------------------------------------
+    */
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     /*
     |--------------------------------------------------------------------------
