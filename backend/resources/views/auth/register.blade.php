@@ -43,7 +43,8 @@
         }
         input[type="text"],
         input[type="email"],
-        input[type="password"] {
+        input[type="password"],
+        select {
             width: 100%;
             padding: 12px;
             border: 1px solid #ddd;
@@ -141,14 +142,34 @@
             <!-- Email -->
             <div class="form-group">
                 <label for="email">Email *</label>
-                <input 
-                    type="email" 
-                    id="email" 
-                    name="email" 
-                    value="{{ old('email') }}" 
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value="{{ old('email') }}"
                     required
                 >
                 @error('email')
+                    <div class="error">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <!-- Niveau scolaire -->
+            <div class="form-group">
+                <label for="level_id">Niveau scolaire *</label>
+                <select
+                    id="level_id"
+                    name="level_id"
+                    required
+                >
+                    <option value="">Sélectionnez votre niveau</option>
+                    @foreach($levels as $level)
+                        <option value="{{ $level->id }}" {{ old('level_id') == $level->id ? 'selected' : '' }}>
+                            {{ $level->level }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('level_id')
                     <div class="error">{{ $message }}</div>
                 @enderror
             </div>

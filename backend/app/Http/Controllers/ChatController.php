@@ -91,9 +91,17 @@ class ChatController extends Controller
             // Prepare AI context
             $discuss->load('agent.subject', 'messages');
 
-            // Create system prompt based on agent's subject
-            $systemPrompt = "Tu es un assistant éducatif spécialisé en {$discuss->agent->subject->theme}. ";
-            $systemPrompt .= $discuss->agent->prompt ?? "Aide l'étudiant à comprendre les concepts de manière claire et pédagogique.";
+            // Get user's school level
+            $user = auth()->user();
+            $user->load('level');
+
+            // Start with the agent's system prompt
+            $systemPrompt = $discuss->agent->prompt ?? "Tu es un assistant éducatif. Aide l'étudiant à comprendre les concepts de manière claire et pédagogique.";
+
+            // Add user's school level information if available
+            if ($user->level) {
+                $systemPrompt .= "\n\nIMPORTANT : L'étudiant est en niveau {$user->level->level}. Adapte tes explications et ton vocabulaire au niveau scolaire de l'étudiant.";
+            }
 
             // Format conversation history for API
             $messages = [

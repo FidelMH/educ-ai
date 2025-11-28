@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Level;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -17,7 +18,8 @@ class RegisterController extends Controller
 {
     public function create(): View
     {
-        return view('auth.register');
+        $levels = Level::orderBy('level', 'asc')->get();
+        return view('auth.register', compact('levels'));
     }
 
     public function store(Request $request): RedirectResponse
@@ -27,6 +29,7 @@ class RegisterController extends Controller
             'firstname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'level_id' => ['required', 'exists:levels,id'],
             'consentement' => ['required', 'accepted'], // doit être coché
         ]);
 
@@ -44,6 +47,8 @@ class RegisterController extends Controller
             'firstname' => $request->firstname,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'level_id' => $request->level_id,
+            'roles_id' => $userRole->id,
             'consentement' => true,
         ]);
 
@@ -51,6 +56,6 @@ class RegisterController extends Controller
 
         auth()->login($user);
 
-        return redirect()->route('dashboard');
+        return redirect()->route('chat');
     }
 }
