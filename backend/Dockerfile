@@ -36,6 +36,10 @@ WORKDIR /var/www
 # Copier le projet
 COPY . /var/www
 
+# Copier et rendre exécutable le script de démarrage
+COPY start-dev.sh /usr/local/bin/start-dev.sh
+RUN chmod +x /usr/local/bin/start-dev.sh
+
 # Créer le dossier vendor avec bonnes permissions
 RUN mkdir -p /var/www/vendor \
  && chown -R $user:www-data /var/www/vendor \
@@ -44,8 +48,8 @@ RUN mkdir -p /var/www/vendor \
 # Utiliser l'utilisateur
 USER $user
 
-# Exposer le port
-EXPOSE 8000
+# Exposer les ports (PHP et Vite)
+EXPOSE 8000 5173
 
 # Commande par défaut
-CMD ["sh", "-c", "composer install && php artisan serve --host=0.0.0.0 --port=8000"]
+CMD ["/usr/local/bin/start-dev.sh"]

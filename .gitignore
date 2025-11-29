@@ -1,0 +1,11 @@
+# Docker Environment Variables (contient les mots de passe)
+.env
+
+# Volumes Docker
+mysql_data/
+laravel_storage/
+laravel_cache/
+
+# OS Files
+.DS_Store
+Thumbs.db
