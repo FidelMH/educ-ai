@@ -17,7 +17,8 @@ services:
       - laravel_storage:/var/www/storage/app
       - laravel_cache:/var/www/bootstrap/cache
     ports:
-      - "8000:8000"
+      - "8000:8000"  # Laravel
+      - "5173:5173"  # Vite HMR
     networks:
       - laravel
     depends_on:
@@ -29,29 +30,6 @@ services:
       - DB_DATABASE=laravel_db
       - DB_USERNAME=laravel_user
       - DB_PASSWORD=laravel_pass
-
-  # Service Vue.js (Frontend)
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    container_name: vue_frontend
-    restart: unless-stopped
-    working_dir: /app
-    volumes:
-      # Synchronisation du code frontend en local
-      - ./frontend:/app
-      # Exclure node_modules pour éviter les conflits
-      - /app/node_modules
-    ports:
-      - "5174:5173"  # Port Vite dev server
-      - "3000:3000"  # Port pour la preview/build
-    networks:
-      - laravel
-    depends_on:
-      - api
-    environment:
-      - VITE_API_URL=http://localhost:8000
 
   # Service MySQL
   db:
