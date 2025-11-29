@@ -18,9 +18,13 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'lastname',
+        'firstname',  
         'email',
         'password',
+        'consentement',
+        'roles_id',
+        'level_id'
     ];
 
     /**
@@ -43,6 +47,45 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'consentement' => 'boolean', 
         ];
+    }
+
+    public function getFullNameAttribute(): string
+    {
+        return "{$this->firstname} {$this->lastname}";
+    }
+
+    // public function has()
+    // {
+    //     return $this->hasMany(Has::class);
+    // }
+
+    public function subjects()
+    {
+        return $this->belongsToMany(Subject::class, 'users_subjects');
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'roles_id');
+    }
+
+    public function level()
+    {
+        return $this->belongsTo(Level::class, 'level_id');
+    }
+
+       public function levels()
+       {
+           return $this->belongsToMany(Level::class, 'levels_users');
+       }
+    public function messages(){
+        return $this->hasMany(Message::class);
+    }
+
+    public function discusses()
+    {
+        return $this->hasMany(Discuss::class);
     }
 }

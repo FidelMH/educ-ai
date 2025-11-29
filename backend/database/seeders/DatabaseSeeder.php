@@ -17,9 +17,22 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
+        // 1. D'ABORD créer les rôles
+        $this->call([
+            RoleSeeder::class,
+            LevelSeeder::class,
+            SubjectSeeder::class,
+        ]);
+
+        // 2. ENSUITE créer l'admin
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'firstname' => 'Admin',
+            'lastname'  => 'Super',
+            'email'     => 'admin@example.com',
+            'email_verified_at' => now(),
+            'password'  => bcrypt('password'),
+            'consentement' => 1,
+            'roles_id'  => 1, // admin
         ]);
     }
 }

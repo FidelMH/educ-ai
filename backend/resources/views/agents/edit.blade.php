@@ -1,0 +1,61 @@
+<x-app-layout>
+    <x-slot name="header">
+        <div class="flex justify-between items-center">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Modifier l\'Agent pour la matière :') }} {{ $agent->subject->theme }}
+            </h2>
+            <a href="{{ route('dashboard.agents.index') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+                Retour à la liste
+            </a>
+        </div>
+    </x-slot>
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
+                    <form method="POST" action="{{ route('dashboard.agents.update', $agent) }}" class="space-y-6">
+                        @csrf
+                        @method('PUT')
+
+                        <!-- Subject (Non-Editable) -->
+                        <div>
+                            <x-input-label for="subject" :value="__('Matière')" />
+                            <input 
+                                id="subject"
+                                type="text"
+                                class="mt-1 block w-full bg-gray-100 border-gray-300 rounded-md shadow-sm"
+                                value="{{ $agent->subject->theme }}"
+                                disabled
+                            />
+                        </div>
+
+                        <!-- Prompt -->
+                        <div>
+                            <x-input-label for="prompt" :value="__('Prompt de base')" />
+                            <textarea
+                                id="prompt"
+                                name="prompt"
+                                rows="5"
+                                class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                required
+                                autofocus
+                            >{{ old('prompt', $agent->prompt) }}</textarea>
+                            <x-input-error :messages="$errors->get('prompt')" class="mt-2" />
+                            <p class="mt-1 text-sm text-gray-500">Ce prompt de base sera complété dynamiquement avec le niveau de l'utilisateur lors d'une conversation.</p>
+                        </div>
+
+                        <div class="flex items-center justify-end space-x-4">
+                            <a href="{{ route('dashboard.agents.index') }}" class="text-gray-600 hover:text-gray-900">
+                                Annuler
+                            </a>
+                            <x-primary-button>
+                                {{ __('Mettre à jour') }}
+                            </x-primary-button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</x-app-layout>
